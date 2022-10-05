@@ -1,31 +1,6 @@
-# This file contains user-defined function for MAIC (trial assignment model) and functions 
-# to evaluate the simulation study performance measures
+# This file contains functions to estimate the simulation study performance measures
 
-### MAIC function
-
-# Function to estimate MAIC (trial assignment model) weights 
-maic <- function(X.EM) {
-  # X.EM: centered S=1 effect modifiers
-  # objective function to be minimized for standard method of moments MAIC
-  Q <- function(alpha, X) {
-    return(sum(exp(X %*% alpha)))
-  }
-  X.EM <- as.matrix(X.EM)
-  N <- nrow(X.EM)
-  K.EM <- ncol(X.EM)
-  alpha <- rep(1,K.EM) # arbitrary starting point for the optimizer
-  # objective function minimized using BFGS
-  Q.min <- optim(fn=Q, X=X.EM, par=alpha, method="BFGS")
-  hat.alpha <- Q.min$par # finite solution is the logistic regression parameters
-  log.hat.w <- rep(0, N)
-  for (k in 1:K.EM) {
-    log.hat.w <- log.hat.w + hat.alpha[k]*X.EM[,k]
-  }
-  hat.w <- exp(log.hat.w) # estimated weights
-  return(hat.w)
-}
-
-### Functions to evaluate performance measures of simulation study
+### Functions to estimate performance measures of simulation study
 
 # bias estimate
 bias <- function(theta.hat, theta) {
