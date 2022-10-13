@@ -309,14 +309,14 @@ process.metrics <- function(means, variances, truth) {
        uci.mcse, cov, cov.mcse, mse.metric, mse.metric.mcse)
 } 
 
-### Matching-adjusted indirect comparison (MAIC)
-load(paste0("Results/MAIC/means.RData"))
-load(paste0("Results/MAIC/variances.RData"))
-simulation.metrics[1,1] <- "MAIC"
-maic.metrics <- process.metrics(maic.mean.log.OR, maic.var.log.OR, Delta.AB)
-simulation.metrics[1,2:11] <- unlist(maic.metrics)
-ate.table[1:n.sim,1] <- "MAIC"
-ate.table[1:n.sim,2] <- maic.mean.log.OR
+### Bucher method (indirect comparison without covariate adjustment)
+load(paste0("Results/Bucher/means.RData"))
+load(paste0("Results/Bucher/variances.RData"))
+simulation.metrics[1,1] <- "Bucher"
+bucher.metrics <- process.metrics(bucher.mean.log.OR, bucher.var.log.OR, Delta.AB)
+simulation.metrics[1,2:11] <- unlist(bucher.metrics)
+ate.table[1:n.sim,1] <- "Bucher"
+ate.table[1:n.sim,2]  <- bucher.mean.log.OR
 
 ### Parametric G-computation
 load(paste0("Results/GComp/means.RData"))
@@ -327,14 +327,14 @@ simulation.metrics[2,2:11] <- unlist(gcomp.metrics)
 ate.table[(n.sim+1):(n.sim*2),1] <- "G-computation"
 ate.table[(n.sim+1):(n.sim*2),2] <- gcomp.mean.log.OR
 
-### Bucher method (indirect comparison without covariate adjustment)
-load(paste0("Results/Bucher/means.RData"))
-load(paste0("Results/Bucher/variances.RData"))
-simulation.metrics[3,1] <- "Bucher"
-bucher.metrics <- process.metrics(bucher.mean.log.OR, bucher.var.log.OR, Delta.AB)
-simulation.metrics[3,2:11] <- unlist(bucher.metrics)
-ate.table[((n.sim*2)+1):(n.sim*3),1] <- "Bucher"
-ate.table[((n.sim*2)+1):(n.sim*3),2] <- bucher.mean.log.OR
+### Matching-adjusted indirect comparison (MAIC)
+load(paste0("Results/MAIC/means.RData"))
+load(paste0("Results/MAIC/variances.RData"))
+simulation.metrics[3,1] <- "MAIC"
+maic.metrics <- process.metrics(maic.mean.log.OR, maic.var.log.OR, Delta.AB)
+simulation.metrics[3,2:11] <- unlist(maic.metrics)
+ate.table[((n.sim*2)+1):(n.sim*3),1] <- "MAIC"
+ate.table[((n.sim*2)+1):(n.sim*3),2] <- maic.mean.log.OR
 
 ## Function generates ridgeline plot for point estimates
 plot.results <- function() {
@@ -449,14 +449,14 @@ colnames(simulation.metrics) <- c("Method", "Bias", "Bias.MCSE", "LCI", "LCI.MCS
 ate.table <- as.data.frame(matrix(nrow=3*n.sim, ncol=2))
 colnames(ate.table) <- c("Method", "ATE")
 
-### Matching-adjusted indirect comparison (MAIC)
-load(paste0("Results/MAIC/means_lr.RData"))
-load(paste0("Results/MAIC/variances_lr.RData"))
-simulation.metrics[1,1] <- "MAIC"
-maic.metrics.lr <- process.metrics(maic.mean.MD, maic.var.MD, Delta.AB)
-simulation.metrics[1,2:11] <- unlist(maic.metrics.lr)
-ate.table[1:n.sim,1] <- "MAIC"
-ate.table[1:n.sim,2] <- maic.mean.MD
+### Bucher method (indirect comparison without covariate adjustment)
+load(paste0("Results/Bucher/means_lr.RData"))
+load(paste0("Results/Bucher/variances_lr.RData"))
+simulation.metrics[1,1] <- "Bucher"
+bucher.metrics.lr <- process.metrics(bucher.mean.MD, bucher.var.MD, Delta.AB)
+simulation.metrics[1,2:11] <- unlist(bucher.metrics.lr)
+ate.table[1:n.sim,1] <- "Bucher"
+ate.table[1:n.sim,2] <- bucher.mean.MD
 
 ### Parametric G-computation
 load(paste0("Results/GComp/means_lr.RData"))
@@ -467,14 +467,14 @@ simulation.metrics[2,2:11] <- unlist(gcomp.metrics.lr)
 ate.table[(n.sim+1):(n.sim*2),1] <- "G-computation"
 ate.table[(n.sim+1):(n.sim*2),2] <- gcomp.mean.MD
 
-### Bucher method (indirect comparison without covariate adjustment)
-load(paste0("Results/Bucher/means_lr.RData"))
-load(paste0("Results/Bucher/variances_lr.RData"))
-simulation.metrics[3,1] <- "Bucher"
-bucher.metrics.lr <- process.metrics(bucher.mean.MD, bucher.var.MD, Delta.AB)
-simulation.metrics[3,2:11] <- unlist(bucher.metrics.lr)
-ate.table[((n.sim*2)+1):(n.sim*3),1] <- "Bucher"
-ate.table[((n.sim*2)+1):(n.sim*3),2] <- bucher.mean.MD
+### Matching-adjusted indirect comparison (MAIC)
+load(paste0("Results/MAIC/means_lr.RData"))
+load(paste0("Results/MAIC/variances_lr.RData"))
+simulation.metrics[3,1] <- "MAIC"
+maic.metrics.lr <- process.metrics(maic.mean.MD, maic.var.MD, Delta.AB)
+simulation.metrics[3,2:11] <- unlist(maic.metrics.lr)
+ate.table[((n.sim*2)+1):(n.sim*3),1] <- "MAIC"
+ate.table[((n.sim*2)+1):(n.sim*3),2] <- maic.mean.MD
 
 ridge.plot.lr <- plot.results() # ridgeline plot
 table.grob.lr <- table.results() # table of results
