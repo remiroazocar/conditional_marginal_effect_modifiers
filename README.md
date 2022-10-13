@@ -1,4 +1,4 @@
-# Purely prognostic variables may modify marginal treatment effects for non-collapsible effect measures
+# Code: Purely prognostic variables may modify marginal treatment effects for non-collapsible effect measures
 
 ### Antonio Remiro-Azócar
 
