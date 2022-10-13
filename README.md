@@ -18,9 +18,9 @@ The code was prepared in `RStudio` using `R` version `4.1.1` in a Windows archit
 
 * `boot 1.3.28` required for use of the non-parametric bootstrap in covariate-adjusted indirect comparisons 
 * `doSNOW 1.0.19` used in combination with `foreach()` to start up local clusters that distribute parallel tasks to different cores
-* `ggplot2 3.3.5` to plot the simulation study results (Figure 1 in the article)
-* `ggridges 0.5.3` to plot the simulation study results (Figure 1 in the article)
-* `gridExtra 2.3` to plot the simulation study results (Figure 1 in the article)
+* `ggplot2 3.3.5` to plot the simulation study results (Figure 1 and Figure 2 in the article)
+* `ggridges 0.5.3` to plot the simulation study results (Figure 1 and Figure 2 in the article)
+* `gridExtra 2.3` to plot the simulation study results (Figure 1 and Figure 2 in the article)
 * `parallel 4.1.1` to detect the number of CPU cores
 
 [1]: https://doi.org/10.48550/arXiv.2210.01757
