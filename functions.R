@@ -53,17 +53,3 @@ mcse.estimate <- function(perf.measure) {
   mcse <- sqrt(sum((perf.measure-perf.measure.mean)^2)/(nsim*(nsim-1)))
   return(mcse)
 }
-
-# Empirical standard error 
-empse <- function(theta.hat) {
-  nsim <- length(theta.hat)
-  tmp <- sum((theta.hat - mean(theta.hat))^2)
-  est <- sqrt(tmp/(nsim-1))
-  return(est)
-}
-
-# EmpSE MCSE
-empse.mcse <- function(empse, nsim) {
-  mcse <- empse/(sqrt(2*(nsim-1)))
-  return(mcse)
-}
