@@ -57,16 +57,16 @@ k <- 1 # row counter for ATEs
 
 for (i in 1:n.scenarios) {
   file.id <- paste0("setting", scenarios$setting[i], "OM", scenarios$OM[i])   
-  # matching-adjusted indirect comparison (MAIC)
-  load(paste0("Results/MAIC/means_", file.id, ".RData"))
-  load(paste0("Results/MAIC/variances_", file.id, ".RData"))
-  simulation.metrics[j,3] <- "MAIC"
-  maic.metrics <- process.metrics(means, variances, Delta.AB) 
-  simulation.metrics[j,4:13] <- unlist(maic.metrics)
-  ate.table[k:(k+n.sim-1),3] <- "MAIC"
+  # Bucher method (indirect treatment comparison without covariate adjustment)
+  load(paste0("Results/Bucher/means_", file.id, ".RData"))
+  load(paste0("Results/Bucher/variances_", file.id, ".RData"))  
+  simulation.metrics[j,3] <- "Bucher"
+  bucher.metrics <- process.metrics(means, variances, Delta.AB)
+  simulation.metrics[j,4:13] <- unlist(bucher.metrics)
+  ate.table[k:(k+n.sim-1),3] <- "Bucher"
   ate.table[k:(k+n.sim-1),4] <- means
   j <- j+1
-  k <- k+n.sim
+  k <- k+n.sim   
   # parametric G-computation
   load(paste0("Results/GComp/means_", file.id, ".RData"))
   load(paste0("Results/GComp/variances_", file.id, ".RData"))  
@@ -77,16 +77,16 @@ for (i in 1:n.scenarios) {
   ate.table[k:(k+n.sim-1),4] <- means
   j <- j+1
   k <- k+n.sim  
-  # Bucher method (indirect treatment comparison without covariate adjustment)
-  load(paste0("Results/Bucher/means_", file.id, ".RData"))
-  load(paste0("Results/Bucher/variances_", file.id, ".RData"))  
-  simulation.metrics[j,3] <- "Bucher"
-  bucher.metrics <- process.metrics(means, variances, Delta.AB)
-  simulation.metrics[j,4:13] <- unlist(bucher.metrics)
-  ate.table[k:(k+n.sim-1),3] <- "Bucher"
+  # matching-adjusted indirect comparison (MAIC)
+  load(paste0("Results/MAIC/means_", file.id, ".RData"))
+  load(paste0("Results/MAIC/variances_", file.id, ".RData"))
+  simulation.metrics[j,3] <- "MAIC"
+  maic.metrics <- process.metrics(means, variances, Delta.AB) 
+  simulation.metrics[j,4:13] <- unlist(maic.metrics)
+  ate.table[k:(k+n.sim-1),3] <- "MAIC"
   ate.table[k:(k+n.sim-1),4] <- means
   j <- j+1
-  k <- k+n.sim    
+  k <- k+n.sim
 }
 
 # function generates ridgeline plot of point estimates for a specific scenario
