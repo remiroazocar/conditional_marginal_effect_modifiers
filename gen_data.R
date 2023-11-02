@@ -73,7 +73,7 @@ sim.data <- function(n, setting=1, study=1, outcome.model="linear") {
   }
   if (outcome.model=="linear") {
     # continuous outcomes generated using linear model with error terms from a standard normal distribution
-    eps <- rnorm(n, 0, 1) # 
+    eps <- rnorm(n, 0, 1) 
     y <- LP + eps
   } else if (outcome.model=="log-linear") {
     # count outcomes generated from Poisson distribution with mean from log-linear model
