@@ -122,21 +122,21 @@ param.gcomp.wrapper <- function(data.S1, data.S2, n.star, resamples, setting=1, 
       if (setting==1) { # homogeneity working model (assumed correctly specified)
         mod <- lm(y~trt+x1+x2+x3, data=dat.S1)  
       } else { # heterogeneity working model (assumed correctly specified)
-        mod <- lm(y~trt+x1*trt+x2+x3, data=dat.S1)
+        mod <- lm(y~trt*x1+x2+x3, data=dat.S1)
       }
     } else if (outcome.model=="log-linear") {
       # covariate-adjusted Poisson regression fitted to S=1 subject-level data using maximum-likelihood
       if (setting==1) { # homogeneity working model
         mod <- glm(y~trt+x1+x2+x3, data=dat.S1, family=poisson(link="log")) 
       } else { # heterogeneity working model
-        mod <- glm(y~trt+x1*trt+x2+x3, data=dat.S1, family=poisson(link="log"))
+        mod <- glm(y~trt*x1+x2+x3, data=dat.S1, family=poisson(link="log"))
       }
     } else if (outcome.model=="logistic") {
       # covariate-adjusted logistic regression fitted to S=1 subject-level data using maximum-likelihood
       if (setting==1) { # homogeneity working model
         mod <- glm(y~trt+x1+x2+x3, data=dat.S1, family=binomial(link="logit"))  
       } else { # heterogeneity working model
-        mod <- glm(y~trt+x1*trt+x2+x3, data=dat.S1, family=binomial(link="logit"))
+        mod <- glm(y~trt*x1+x2+x3, data=dat.S1, family=binomial(link="logit"))
       }
     }
     # counterfactual datasets with fixed covariates
