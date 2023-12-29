@@ -1,4 +1,4 @@
-# Transportability of marginal estimands in evidence synthesis: Code
+# Transportability of model-based estimands in evidence synthesis: Code
 
 ### Antonio Remiro-Azócar
 
@@ -6,7 +6,7 @@
 
 ### *2023*
 
-This repository contains the R code used for my paper [Transportability of marginal estimands in evidence synthesis][1]. 
+This repository contains the R code used for my paper [Transportability of model-based estimands in evidence synthesis][1]. 
 
 ## Utilizing the Scripts
 
